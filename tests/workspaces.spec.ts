@@ -5,6 +5,7 @@ import { Login } from "../src/pages/Login";
 import { CreateWorkspacePage } from "../src/pages/CreateWorkspacePage";
 import { WorkspacePage } from "../src/pages/WorkspacePage";
 import { SidebarPage } from "../src/pages/SidebarPage";
+import config from "../testConfig.json";
 
 test.describe("Workspace Tests", () => {
 
@@ -15,9 +16,9 @@ test.describe("Workspace Tests", () => {
     let workspacePage: WorkspacePage;
     let sidebarPage: SidebarPage;
 
-    let url = "https://trello.com/login";
-    let email = "cristiansalazar822@gmail.com";
-    let password = "trello2023@";
+    let url = config.url
+    let email = config.credentials.email;
+    let password = config.credentials.password;
     let workspaceName = "Workspace Playwright";
     let workspaceType = "Education";
 
@@ -29,7 +30,6 @@ test.describe("Workspace Tests", () => {
         sidebarPage = new SidebarPage(page);
         workspaceCreatePage = new CreateWorkspacePage(page);
         workspacePage = new WorkspacePage(page);
-       
         page.goto(url);
     })
 
