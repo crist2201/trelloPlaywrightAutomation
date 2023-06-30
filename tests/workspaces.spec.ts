@@ -50,7 +50,7 @@ test.describe("Workspace Tests", () => {
 
     test("Create workspace from sidebar menu", async () => {
         await sidebarPage.clickAddBtn();
-        await workspaceCreatePage.setWorkspaceName(workspaceName + "1");
+        await workspaceCreatePage.setWorkspaceName(workspaceName);
         await workspaceCreatePage.setWorkspaceType(workspaceType);
         await workspaceCreatePage.clickContinueBtn();
         await workspaceCreatePage.clickDoThisLaterBtn();

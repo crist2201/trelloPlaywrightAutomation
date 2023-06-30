@@ -4,21 +4,21 @@ import { CreateMenuPage } from "../src/pages/CreateMenuPage";
 import { CreateBoardPage } from "../src/pages/CreateBoardPage";
 import { BoardPage } from "../src/pages/BoardPage";
 import { Login } from "../src/pages/Login";
+import config from "../testConfig.json";
 
 test.describe("Board Tests", () => {
 
-    //let loginEmailPage : EmailLoginPage;
-    //let loginPasswordPage: PasswordLoginPage;
     let login: Login;
     let boardsPage: BoardsPage;
     let menuCreatePage: CreateMenuPage;
     let createBoardPage: CreateBoardPage;
     let boardPage: BoardPage;
 
-    let url = "https://trello.com/login";
-    let email = "cristiansalazar822@gmail.com";
-    let password = "trello2023@";
+    let url = config.url
+    let email = config.credentials.email;
+    let password = config.credentials.password;
     let boardTitle = "Board Playwright";
+
 
     test.beforeAll(async ({ browser }) =>{
         const page = await browser.newPage();
