@@ -1,49 +1,39 @@
 import { test, expect } from "@playwright/test";
-import { EmailLoginPage } from "../src/pages/loginTrelloEmailPage";
-import { PasswordLoginPage } from "../src/pages/LoginTrelloPasswordPage";
-import { BoardsPage } from "../src/pages/BoardsPage";
+import { Login } from "../src/pages/Login";
+import { CreateWorkspacePage } from "../src/pages/CreateWorkspacePage";
+import { WorkspacePage } from "../src/pages/WorkspacePage";
+import { SideBar } from "../src/components/SideBar";
+import { HomePage } from "../src/pages/HomePage";
+import { TopMenu } from "../src/components/TopMenu";
+import config from "../testConfig.json";
 import * as util from "util"; 
 
-/*test.describe("Login Test", () => {
+test.describe("Login Test", () => {
 
-    let loginEmailPage : EmailLoginPage;
-    let loginPasswordPage: PasswordLoginPage;
-    let boardsPage: BoardsPage;
-
-    let email = "cristiansalazar822@gmail.com"
-    let password = "trello2023@"
+    let login: Login;
+    let topMenu: TopMenu;
+    let homePage: HomePage;
+    let url = config.url
+    let email = config.credentials.email;
+    let password = config.credentials.password;
 
     test.beforeAll(async ({ browser }) =>{
         const page = await browser.newPage();
-        loginEmailPage = new EmailLoginPage(page);
-        loginPasswordPage = new PasswordLoginPage(page);
-        boardsPage = new BoardsPage(page)
-        await page.goto("https://trello.com/login");
+        login = new Login(page);
+        topMenu = new TopMenu(page);
+        homePage = new HomePage(page);
+        page.goto(url);
     })
 
-    test.afterAll(async ({ browser }) => {
-        await browser.close();
+    test.beforeEach(async() =>{
+        !await homePage.isLoggedIn() && await homePage.goTologin(email, password); 
     })
 
     test("Login successfully", async () => {
-        await loginEmailPage.setEmail(email);
-        await loginEmailPage.clickButton();
-        await loginPasswordPage.setPassword(password);
-        await loginPasswordPage.clickLoginButton();
-        await boardsPage.clickAccountBtn();
-        await expect(await boardsPage.checkEmail(email), "Email was not found").toHaveText(email);
+        await expect(await topMenu.checkEmail(email), "Email was not found").toHaveText(email);
     })
 
 
-    test("Login unsuccessfully", async () => {
-        let ch = 'a';
-        await loginEmailPage.setEmail(email);
-        await loginEmailPage.clickButton();
-        await loginPasswordPage.setPassword(util.format('%s%s',password,ch));
-        await loginPasswordPage.clickLoginButton();
-        await expect(await loginPasswordPage.isErrorFormPresent(), "Error form was not displayed").toBeVisible();
-    })
-
-})*/
+})
 
 
