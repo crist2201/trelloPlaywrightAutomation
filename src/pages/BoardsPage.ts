@@ -1,31 +1,15 @@
 import {Page, Locator} from '@playwright/test' 
+import { TopMenu } from '../components/TopMenu';
 
 export class BoardsPage{
 
     private readonly page : Page;
-    private readonly accountBtn: Locator;
-    private readonly createBtn: Locator;
+    private topMenu : TopMenu;
+
 
     constructor(page: Page){
         this.page = page
-        this.accountBtn = page.getByTestId("header-member-menu-button");
-        this.createBtn = page.getByTestId("header-create-menu-button");
-    }
-
-
-    async clickAccountBtn(){
-        await this.accountBtn.waitFor({state: 'visible'});
-        await this.accountBtn.click();
-    }
-
-
-    async checkEmail(email: string){
-        return this.page.getByText(email); 
-    }
-
-
-    async clickCreateBtn(){
-        await this.createBtn.click();
+        this.topMenu = new TopMenu(page);
     }
 
 
