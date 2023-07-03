@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { BoardsPage } from "../src/pages/BoardsPage";
 import { CreateMenuPage } from "../src/pages/CreateMenuPage";
-import { Login } from "../src/pages/Login";
 import { CreateWorkspacePage } from "../src/pages/CreateWorkspacePage";
 import { WorkspacePage } from "../src/pages/WorkspacePage";
 import { SidebarPage } from "../src/pages/SidebarPage";
 import config from "../testConfig.json";
+import { HomePage } from "../src/pages/HomePage";
 
 test.describe("Workspace Tests", () => {
 
-    let login: Login;
+    let homePage: HomePage;
     let boardsPage: BoardsPage;
     let menuCreatePage: CreateMenuPage;
     let workspaceCreatePage: CreateWorkspacePage;
@@ -19,12 +19,12 @@ test.describe("Workspace Tests", () => {
     let url = config.url
     let email = config.credentials.email;
     let password = config.credentials.password;
-    let workspaceName = "Workspace Playwright";
+    let workspaceName = "Workspace Playwright 1";
     let workspaceType = "Education";
 
     test.beforeAll(async ({ browser }) =>{
         const page = await browser.newPage();
-        login = new Login(page);
+        homePage = new HomePage(page);
         boardsPage = new BoardsPage(page)
         menuCreatePage = new CreateMenuPage(page);
         sidebarPage = new SidebarPage(page);
@@ -34,7 +34,7 @@ test.describe("Workspace Tests", () => {
     })
 
     test.beforeEach(async() =>{
-        await login.login(email, password);
+        !await homePage.isLoggedIn() && await homePage.goTologin(email, password); 
     })
     
     test("Create workspace from top menu", async () => {
