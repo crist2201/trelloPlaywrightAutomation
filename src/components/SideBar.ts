@@ -2,11 +2,10 @@ import {Page, Locator} from '@playwright/test'
 
 
 
-export class SidebarPage{
+export class SideBar{
 
     private readonly page : Page;
     private readonly addBtn: Locator;
-
 
 
     constructor(page: Page){
