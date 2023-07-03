@@ -1,14 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, Page } from "@playwright/test";
 import { BoardsPage } from "../src/pages/BoardsPage";
 import { CreateMenuPage } from "../src/pages/CreateMenuPage";
 import { CreateBoardPage } from "../src/pages/CreateBoardPage";
 import { BoardPage } from "../src/pages/BoardPage";
 import { Login } from "../src/pages/Login";
+import { HomePage } from "../src/pages/HomePage";
 import config from "../testConfig.json";
 
 test.describe("Board Tests", () => {
 
-    let login: Login;
+    let homePage: HomePage;
     let boardsPage: BoardsPage;
     let menuCreatePage: CreateMenuPage;
     let createBoardPage: CreateBoardPage;
@@ -22,7 +23,7 @@ test.describe("Board Tests", () => {
 
     test.beforeAll(async ({ browser }) =>{
         const page = await browser.newPage();
-        login = new Login(page);
+        homePage = new HomePage(page);
         boardsPage = new BoardsPage(page)
         menuCreatePage = new CreateMenuPage(page);
         createBoardPage = new CreateBoardPage(page);
@@ -31,7 +32,8 @@ test.describe("Board Tests", () => {
     })
 
     test.beforeEach(async() =>{
-        await login.login(email, password);
+        !await homePage.isLoggedIn() && await homePage.goTologin(email, password);
+       // await homePage.goTologin(email, password); 
     })
     
     test("Create board from top menu", async () => {
