@@ -1,12 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { BoardsPage } from "../src/pages/BoardsPage";
 import { CreateMenuPage } from "../src/pages/CreateMenuPage";
 import { CreateWorkspacePage } from "../src/pages/CreateWorkspacePage";
 import { WorkspacePage } from "../src/pages/WorkspacePage";
 import { SideBar } from "../src/components/SideBar";
-import config from "../testConfig.json";
 import { HomePage } from "../src/pages/HomePage";
 import { TopMenu } from "../src/components/TopMenu";
+import config from "../testConfig.json";
 
 test.describe("Workspace Tests", () => {
 

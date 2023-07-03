@@ -7,27 +7,25 @@ export class PasswordLoginPage{
     private readonly loginBtn: Locator;
     private readonly errorForm: Locator;
 
-constructor(page: Page){
-    this.page = page
-    this.passwordTxtBox = page.locator("#password");
-    this.loginBtn = page.locator("#login-submit");
-    this.errorForm = page.getByTestId("form-error--content");
+    constructor(page: Page){
+        this.page = page
+        this.passwordTxtBox = page.locator("#password");
+        this.loginBtn = page.locator("#login-submit");
+        this.errorForm = page.getByTestId("form-error--content");
+    }
+
+    async setPassword(password: string){
+        await this.passwordTxtBox.fill(password);
+    }
 
 
-}
+    async clickLoginButton(){
+        await this.loginBtn.click();
+    }
 
-async setPassword(password: string){
-    await this.passwordTxtBox.fill(password);
-}
-
-
-async clickLoginButton(){
-    await this.loginBtn.click();
-}
-
-async isErrorFormPresent(){
-    return this.errorForm;
-}
+    async isErrorFormPresent(){
+        return this.errorForm;
+    }
 
     
 }
